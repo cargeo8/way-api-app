@@ -52,6 +52,11 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
 
+        if ($exception instanceof BaseServiceException) {
+            return response([
+                'error' => $exception->getMessage()
+            ], 500);
+        }
         if ($exception instanceof AuthenticationException) {
             return response([
                 'error' => $exception->getMessage()

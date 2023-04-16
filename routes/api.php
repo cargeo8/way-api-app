@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthenticationController;
+use App\Http\Controllers\Api\ClienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,10 @@ Route::middleware('auth:api')->group(function () {
         return $request->user();
     });
 });
+
 Route::middleware("auth:api")
-    ->get("getAllTest", function () {
-        return ["ok" => true, "auth" => Auth::guard('api')->check()];
-    });
+    ->get("getAllTest", [ClienteController::class, "GetMyClient"]);
+
 Route::middleware("api")->group(function () {
     Route::prefix("auth")->group(function () {
         Route::post("login", [AuthenticationController::class, 'login']);
