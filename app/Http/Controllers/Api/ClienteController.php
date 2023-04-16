@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cliente\GetMyClientRequest;
 use App\Http\Services\ClienteService;
-use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {

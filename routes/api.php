@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthenticationController;
 use App\Http\Controllers\Api\ClienteController;
+use App\Http\Controllers\Api\SucursalesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,8 @@ Route::middleware('auth:api')->group(function () {
 
 Route::middleware("auth:api")
     ->get("getAllTest", [ClienteController::class, "GetMyClient"]);
-
+Route::middleware("auth:api")
+    ->get("getAllSucursales", [SucursalesController::class, "GetAllSucursales"]);
 Route::middleware("api")->group(function () {
     Route::prefix("auth")->group(function () {
         Route::post("login", [AuthenticationController::class, 'login']);
