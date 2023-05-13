@@ -1,0 +1,180 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/getAllTest:
+    get:
+      summary: ''
+      operationId: getApiGetAllTest
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                codigo_cliente:
+                  type: string
+                  description: ''
+                  example: accusamus
+              required:
+                - codigo_cliente
+      security: []
+  /api/getAllSucursales:
+    get:
+      summary: ''
+      operationId: getApiGetAllSucursales
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/auth/login:
+    post:
+      summary: ''
+      operationId: postApiAuthLogin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: bud.reilly@example.net
+                password:
+                  type: string
+                  description: ''
+                  example: praesentium
+              required:
+                - email
+                - password
+      security: []
+  /api/auth/logout:
+    post:
+      summary: ''
+      operationId: postApiAuthLogout
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                allDevice:
+                  type: string
+                  description: ''
+                  example: necessitatibus
+              required:
+                - allDevice
+      security: []
+  '/api/promociones/{user_id}':
+    get:
+      summary: ''
+      operationId: getApiPromocionesUser_id
+      description: ''
+      parameters: []
+      responses:
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'App\Http\Controllers\Api\PromocionesController::GetPromocionesByUser(): Argument #1 ($user_id) must be of type ?int, string given, called in /home/adolfo/way/way-api-app/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
+                properties:
+                  error:
+                    type: string
+                    example: 'App\Http\Controllers\Api\PromocionesController::GetPromocionesByUser(): Argument #1 ($user_id) must be of type ?int, string given, called in /home/adolfo/way/way-api-app/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'Optional parameter. The ID of the user.'
+        required: true
+        schema:
+          type: string
+        examples:
+          omitted:
+            summary: 'When the value is omitted'
+            value: ''
+          present:
+            summary: 'When the value is present'
+            value: officia
+tags:
+  -
+    name: Endpoints
+    description: ''

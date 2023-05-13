@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PromocionResource;
+use App\Http\Services\PromocionesService;
 use Illuminate\Http\Request;
 
 class PromocionesController extends Controller
 {
-    public function GetPromocionesByUser(int $user_id)
+    public function __construct(private PromocionesService $_promociones)
     {
+    }
+    public function GetPromocionesByUser(?int $user_id = null)
+    {
+        $proms = $this->_promociones->GetPromociones($user_id);
+        return PromocionResource::make($proms);
     }
 }
