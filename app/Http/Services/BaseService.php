@@ -7,6 +7,7 @@ use App\Exceptions\BaseServiceException;
 use App\Models\Control;
 use Exception;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 
 class BaseService

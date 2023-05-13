@@ -8,7 +8,6 @@ class PromocionesService extends BaseService
 
     public function GetPromociones(?int $user)
     {
-        $promociones = $this->Make()->get(self::GET_PROMOCIONES . "/" . ($user ?? ''));
-        return $promociones->json();
+        return $this->Make()->get(self::GET_PROMOCIONES . "/" . ($user ?? ''));
     }
 }

@@ -15,6 +15,9 @@ class PromocionesController extends Controller
     public function GetPromocionesByUser(?int $user_id = null)
     {
         $proms = $this->_promociones->GetPromociones($user_id);
-        return PromocionResource::make($proms);
+
+        if ($proms->failed())
+            return response()->json($proms->json(), $proms->status());
+        return PromocionResource::make($proms->json());
     }
 }
