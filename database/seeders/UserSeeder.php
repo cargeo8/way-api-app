@@ -18,7 +18,12 @@ class UserSeeder extends Seeder
             [
                 'email' => 'admi3n@gmail.com',
                 'name' => 'admin3',
-                'password' => Hash::make('admin123')
+                'password' => Hash::make('admin123'),
+                "names" => "admin",
+                "surnames" => "admin",
+                "id_type" => "dui",
+                "person_id" => "000000000",
+                "codciud" => "0101"
             ]
         );
     }

@@ -32,5 +32,6 @@ Route::middleware("api")->group(function () {
     Route::prefix("auth")->group(function () {
         Route::post("login", [AuthenticationController::class, 'login']);
         Route::post("logout", [AuthenticationController::class, 'logout']);
+        Route::post("register", [AuthenticationController::class, 'register']);
     });
 });
