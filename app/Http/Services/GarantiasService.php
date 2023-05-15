@@ -12,8 +12,8 @@ class GarantiasService extends BaseService
     {
         return  $this->Make()->get(self::GET_MIS_GARANTIAS . "/$codigo_cliente");
     }
-    public function GetDetalleGarantias(string $ods)
+    public function GetDetalleGarantias(string $codigo_cliente, string $ods_id)
     {
-        return  $this->Make()->get(self::GET_DETALLE_GARANTIA . "/$ods");
+        return  $this->Make()->get(self::GET_DETALLE_GARANTIA . "?codigo_cliente=$codigo_cliente&ods_id=$ods_id");
     }
 }
