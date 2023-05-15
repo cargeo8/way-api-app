@@ -9,6 +9,7 @@ use App\Http\Services\CuentasService;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class CuentasController extends Controller
@@ -16,8 +17,9 @@ class CuentasController extends Controller
     public function __construct(private CuentasService $_cuentas)
     {
     }
-    public function GetMisCuentas(User $user)
+    public function GetMisCuentas(string $user_id)
     {
+        $user = Auth::user();
         if (!$user->codigo_cliente)
             return response()->json(
                 ["message" => "Este usuario no tiene codigo de cliente"],
@@ -31,8 +33,9 @@ class CuentasController extends Controller
 
         return CuentasResource::make($mis_cuentas->json());
     }
-    public function GetDetalleCuenta(User $user, int $referen_id)
+    public function GetDetalleCuenta(string $user_id, int $referen_id)
     {
+        $user = Auth::user();
         if (!$user->codigo_cliente)
             return response()->json(
                 ["message" => "Este usuario no tiene codigo de cliente"],
