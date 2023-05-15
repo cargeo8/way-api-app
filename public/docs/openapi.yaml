@@ -60,7 +60,7 @@ paths:
                 codigo_cliente:
                   type: string
                   description: ''
-                  example: accusamus
+                  example: libero
               required:
                 - codigo_cliente
       security: []
@@ -105,11 +105,11 @@ paths:
                 email:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: bud.reilly@example.net
+                  example: tkunde@example.com
                 password:
                   type: string
                   description: ''
-                  example: praesentium
+                  example: reprehenderit
               required:
                 - email
                 - password
@@ -133,9 +133,82 @@ paths:
                 allDevice:
                   type: string
                   description: ''
-                  example: necessitatibus
+                  example: iure
               required:
                 - allDevice
+      security: []
+  /api/auth/register:
+    post:
+      summary: ''
+      operationId: postApiAuthRegister
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                names:
+                  type: string
+                  description: ''
+                  example: autem
+                surnames:
+                  type: string
+                  description: ''
+                  example: nulla
+                IdType:
+                  type: string
+                  description: 'Must be one of <code>dui</code>, <code>nit</code>, or <code>passport</code>.'
+                  example: dui
+                personId:
+                  type: string
+                  description: ''
+                  example: delectus
+                birthDate:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2023-05-15T22:26:17'
+                departament:
+                  type: string
+                  description: ''
+                  example: eligendi
+                city:
+                  type: string
+                  description: ''
+                  example: dolores
+                address:
+                  type: string
+                  description: ''
+                  example: officiis
+                phoneNumber:
+                  type: string
+                  description: ''
+                  example: aut
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: rosella.konopelski@example.net
+                password:
+                  type: string
+                  description: ''
+                  example: tempora
+              required:
+                - names
+                - surnames
+                - IdType
+                - personId
+                - birthDate
+                - departament
+                - city
+                - address
+                - phoneNumber
+                - email
+                - password
       security: []
   '/api/promociones/{user_id}':
     get:
@@ -173,7 +246,217 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: officia
+            value: voluptatem
+  '/api/cuentas/{user_id}':
+    get:
+      summary: ''
+      operationId: getApiCuentasUser_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: et
+        required: true
+        schema:
+          type: string
+  '/api/cuentas/{user_id}/detalle/{referen_id}':
+    get:
+      summary: ''
+      operationId: getApiCuentasUser_idDetalleReferen_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: aperiam
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: referen_id
+        description: 'The ID of the referen.'
+        example: culpa
+        required: true
+        schema:
+          type: string
+  '/api/garantias/{user}':
+    get:
+      summary: ''
+      operationId: getApiGarantiasUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: user
+        description: ''
+        example: illo
+        required: true
+        schema:
+          type: string
+  '/api/garantias/{user_id}/detalle/{processId}':
+    get:
+      summary: ''
+      operationId: getApiGarantiasUser_idDetalleProcessId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: quasi
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: processId
+        description: ''
+        example: voluptatem
+        required: true
+        schema:
+          type: string
+  '/api/entregas/{user_id}':
+    get:
+      summary: ''
+      operationId: getApiEntregasUser_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: veniam
+        required: true
+        schema:
+          type: string
+  '/api/entregas/{user_id}/detalle/{processId}':
+    get:
+      summary: ''
+      operationId: getApiEntregasUser_idDetalleProcessId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: accusamus
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: processId
+        description: ''
+        example: est
+        required: true
+        schema:
+          type: string
 tags:
   -
     name: Endpoints
