@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthenticationController;
 use App\Http\Controllers\Api\ClienteController;
 use App\Http\Controllers\Api\SucursalesController;
+use App\Http\Controllers\DepartamentosMunicipiosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,9 @@ Route::middleware("api")->group(function () {
         Route::post("logout", [AuthenticationController::class, 'logout']);
         Route::post("register", [AuthenticationController::class, 'register']);
     });
+});
+
+Route::middleware("auth:api")->group(function () {
+    Route::get("/getDepartamentos", [DepartamentosMunicipiosController::class, "GetDepartamentos"]);
+    Route::get("/getMunicipios/{coddpto}", [DepartamentosMunicipiosController::class, "GetMunicipioByCodDpto"]);
 });
