@@ -22,7 +22,7 @@ class PromocionesController extends Controller
     }
     public function GetImage($path)
     {
-        $proms = $this->_promociones->GetPromociones($path);
+        $proms = $this->_promociones->GetPromocionesImage($path);
         return $proms->body();
     }
 }
