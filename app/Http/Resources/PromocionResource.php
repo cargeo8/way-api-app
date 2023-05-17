@@ -26,7 +26,8 @@ class PromocionResource extends JsonResource
                 "title" => $item["title"],
                 "subTitle" => $item["subtitle"],
                 "description" => $item["descripcion"],
-                "date" => Carbon::parse($item["fecha_proceso"])->format("Y-m-d")
+                "date" => Carbon::parse($item["fecha_proceso"])->format("Y-m-d"),
+                "link_title" => $item["link_title"]
             ]
         );
     }
