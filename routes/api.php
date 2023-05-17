@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthenticationController;
 use App\Http\Controllers\Api\ClienteController;
+use App\Http\Controllers\Api\PromocionesController;
 use App\Http\Controllers\Api\SucursalesController;
 use App\Http\Controllers\DepartamentosMunicipiosController;
 use Illuminate\Http\Request;
