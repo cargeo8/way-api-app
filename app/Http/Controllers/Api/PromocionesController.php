@@ -20,4 +20,9 @@ class PromocionesController extends Controller
             return response()->json($proms->json(), $proms->status());
         return PromocionResource::make($proms->json());
     }
+    public function GetImage($path)
+    {
+        $proms = $this->_promociones->GetPromociones($path);
+        return $proms->body();
+    }
 }

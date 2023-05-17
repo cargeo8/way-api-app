@@ -38,6 +38,8 @@ Route::middleware("api")->group(function () {
     });
 });
 Route::get("promociones/{user_id?}", [PromocionesController::class, 'GetPromocionesByUser']);
+Route::get("promocionImage/{path}", [PromocionesController::class, 'GetPromocionesByUser']);
+
 
 Route::get("/getDepartamentos", [DepartamentosMunicipiosController::class, "GetDepartamentos"]);
 Route::get("/getMunicipios/{coddpto}", [DepartamentosMunicipiosController::class, "GetMunicipioByCodDpto"]);

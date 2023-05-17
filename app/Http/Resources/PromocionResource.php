@@ -22,7 +22,7 @@ class PromocionResource extends JsonResource
             [
                 "postId" => $item["id"],
                 "url" => $item["link"],
-                "url_image" => $item["image_url"],
+                "url_image" => "api/promocionImage/" . $item["image_url"],
                 "title" => $item["title"],
                 "subTitle" => $item["subtitle"],
                 "description" => $item["descripcion"],
