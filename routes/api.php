@@ -36,7 +36,7 @@ Route::middleware("api")->group(function () {
         Route::post("register", [AuthenticationController::class, 'register']);
     });
 });
-
+Route::get("promociones/{user_id?}", [PromocionesController::class, 'GetPromocionesByUser']);
 Route::middleware("auth:api")->group(function () {
     Route::get("/getDepartamentos", [DepartamentosMunicipiosController::class, "GetDepartamentos"]);
     Route::get("/getMunicipios/{coddpto}", [DepartamentosMunicipiosController::class, "GetMunicipioByCodDpto"]);
