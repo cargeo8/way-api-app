@@ -26,7 +26,7 @@ class CuentasDetalleResource extends JsonResource
             "status" => $this["estado"],
             "branch" => $this["sucursal"]["nombre"],
             "detailItems" => Arr::map(
-                $this["prospecto"]["detalles"],
+                $this["prospecto"]["detalles"] ?? [],
                 fn ($detalle) => [
                     "itemId" => $detalle["id"],
                     "itemCode" => $detalle["articulo"]["codigo_articulo"],
