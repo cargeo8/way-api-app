@@ -20,7 +20,7 @@ class GarantiasResource extends JsonResource
             "refNumber" => $item["numero_orden"],
             "type" => $item["tipo_servicio"] == 1 ? "domicilar" : "en tienda",
             "statusId" => $item["codigo_estado_seguimiento"],
-            "status" => $item["estado_seguimiento_actual"]["descripcion_estado"],
+            "status" => $item["estado_seguimiento_actual"]["descripcion_estado"] ?? "Sin actualizaciones",
             "detailItem" => [
                 "itemCode" => $item["articulo"]["codigo_articulo"],
                 "itemName" => $item["articulo"]["nombre_articulo"],
