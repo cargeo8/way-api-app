@@ -32,6 +32,7 @@ class GarantiaDetalleResource extends JsonResource
             "detailProcess" => Arr::map($this["seguimientos"], fn ($_seguimiento) => [
                 "statusId" => $_seguimiento["estado"]["id"],
                 "status" => $_seguimiento["estado"]["descripcion_estado"],
+                "description" => $_seguimiento["comentario"] ?? "N/A",
                 "date" => $_seguimiento["fecha_proceso"],
             ])
         ];
