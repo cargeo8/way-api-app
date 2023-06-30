@@ -19,7 +19,7 @@ class ControlPlacaResource extends JsonResource
             "processId" => $item["id"],
             "refNumber" => $item["referencia_cuenta"],
             "statusId" => $item["codigo_estado_seguimiento_actual"],
-            "status" => $item["estado_seguimiento_actual"]["descripcion_estado"],
+            "status" => $item["estado_seguimiento_actual"]["descripcion_estado"] ?? "Sin actualizaciones",
             "detailItem" => [
                 "itemCode" => $item["articulo"]["codigo_articulo"],
                 "itemName" => $item["articulo"]["nombre_articulo"],
