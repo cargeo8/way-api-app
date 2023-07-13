@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\WayApp\Auth\RegisterRequest;
+use App\Http\Requests\WayApp\Auth\UpdateUser;
 use App\Http\Services\ClienteService;
 use App\Models\Control;
 use App\Models\Role;
@@ -98,12 +99,38 @@ class AuthenticationController extends Controller
             "surnames" => $data["surnames"],
             "id_type" => $data["IdType"],
             "person_id" => $data["personId"],
-            "codciud" => $data["city"]
-
+            "codciud" => $data["city"],
+            "address" => $data["address"],
+            "phoneNumber" => $data["phone_number"],
         ];
         $createdUser = User::create(
             $dataForUser
         );
         return response()->json(["message" => "Has creado tu cuenta con éxito"]);
+    }
+
+
+    public function editUser(UpdateUser $request)
+    {
+        $data = $request->validated();
+        $renameMap = [
+            "userId" => "id",
+            "IdType" => "id_type",
+            "personId" => "person_id",
+            "city" => "codciud",
+            "address" => "address",
+            "phoneNumber" => "phone_number",
+            "email" => "email",
+            "password" => "password",
+            "status" => "status"
+        ];
+
+        $array = array_combine(array_map(function ($el) use ($renameMap) {
+            return $renameMap[$el];
+        }, array_keys($data)), array_values($data));
+
+        DB::table("users")->where("id", $array["id"])->update($array);
+
+        return response()->json(["message" => "Has actualizado tu usuario con éxito."]);
     }
 }

@@ -35,6 +35,7 @@ Route::middleware("api")->group(function () {
         Route::post("login", [AuthenticationController::class, 'login']);
         Route::post("logout", [AuthenticationController::class, 'logout']);
         Route::post("register", [AuthenticationController::class, 'register']);
+        Route::post("editUser", [AuthenticationController::class, 'editUser']);
     });
 });
 Route::get("promociones/{user_id?}", [PromocionesController::class, 'GetPromocionesByUser']);
