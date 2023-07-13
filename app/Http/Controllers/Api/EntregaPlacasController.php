@@ -27,7 +27,7 @@ class EntregaPlacasController extends Controller
         if ($misEntregas->failed())
             return response()->json($misEntregas->json(), $misEntregas->status());
 
-        return ControlPlacaResource::make($misEntregas->json(1));
+        return ControlPlacaResource::make($misEntregas->json());
     }
     public function DetalleEntregas(string $user_id, int $processId)
     {
