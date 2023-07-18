@@ -43,7 +43,7 @@ class CuentasDetalleResource extends JsonResource
                 $this["pagos"],
                 fn ($cobro) => [
                     "paymentId" => $cobro["id"],
-                    "date" => Carbon::parse($cobro["fecha_proceso"])->format("d/M/Y"),
+                    "date" => Carbon::parse($cobro["fecha_proceso"])->format("d/m/Y"),
                     "paymentAmount" => $cobro["valcuota"],
                     "type" => $cobro["tipo_recibo"]["descripcion"],
                     "branch" => $cobro["sucursal"]["nombre"] ?? "-",
