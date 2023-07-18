@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthenticationController;
+use App\Http\Controllers\Api\BannerMarcasController;
 use App\Http\Controllers\Api\ClienteController;
 use App\Http\Controllers\Api\PromocionesController;
 use App\Http\Controllers\Api\SucursalesController;
@@ -40,6 +41,9 @@ Route::middleware("api")->group(function () {
 });
 Route::get("promociones/{user_id?}", [PromocionesController::class, 'GetPromocionesByUser']);
 Route::get("promocionImage/{path}", [PromocionesController::class, 'GetImage']);
+
+Route::get("marcas", [BannerMarcasController::class, 'GetMarcas']);
+Route::get("marcasImage/{path}", [BannerMarcasController::class, 'GetImage']);
 
 
 Route::get("/getDepartamentos", [DepartamentosMunicipiosController::class, "GetDepartamentos"]);
