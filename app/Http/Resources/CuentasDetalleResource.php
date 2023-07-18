@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
@@ -42,7 +43,7 @@ class CuentasDetalleResource extends JsonResource
                 $this["pagos"],
                 fn ($cobro) => [
                     "paymentId" => $cobro["id"],
-                    "date" => $cobro["fecha_proceso"],
+                    "date" => Carbon::parse($cobro["fecha_proceso"])->format("d/M/Y"),
                     "paymentAmount" => $cobro["valcuota"],
                     "type" => $cobro["tipo_recibo"]["descripcion"],
                     "branch" => $cobro["sucursal"]["nombre"] ?? "-",
