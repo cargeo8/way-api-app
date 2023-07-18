@@ -24,7 +24,7 @@ class CuentasDetalleResource extends JsonResource
             "totalPayment" => $this["valor_cuota"],
             "balance" => $this["saldo"],
             "status" => $this["estado"],
-            "branch" => $this["sucursal"]["nombre"],
+            "branch" => $this["sucursal"]["nombre"] ?? "-",
             "detailItems" => Arr::map(
                 $this["prospecto"]["detalles"] ?? [],
                 fn ($detalle) => [
@@ -39,13 +39,14 @@ class CuentasDetalleResource extends JsonResource
                 ]
             ),
             "detailPayments" => Arr::map(
-                $this["cobrosc"],
+                $this["pagos"],
                 fn ($cobro) => [
                     "paymentId" => $cobro["id"],
                     "date" => $cobro["fecha_proceso"],
                     "paymentAmount" => $cobro["valcuota"],
-                    "type" => "---pendiente---",
-                    "branch" => $cobro["sucursal"]["nombre"],
+                    "type" => $cobro["tipo_recibo"]["descripcion"],
+                    "branch" => $cobro["sucursal"]["nombre"] ?? "-",
+                    "paid" => $cobro["es_cobros_c"]
                 ]
             )
         ];
