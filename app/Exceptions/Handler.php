@@ -51,7 +51,14 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-
+        $renderValidationsErrors = function (array $arr): string {
+            $out = "";
+            $keys = array_keys($arr);
+            foreach ($keys as $key) {
+                $out .= implode("\n", $arr[$key]) . "\n";
+            }
+            return $out;
+        };
         if ($exception instanceof BaseServiceException) {
             return response([
                 'error' => $exception->getMessage()
@@ -64,7 +71,7 @@ class Handler extends ExceptionHandler
         }
         if ($exception instanceof ValidationException) {
             return response([
-                'errors' => $exception->errors()
+                'message' => "Se encontraron los siguientes errores: \n" . $renderValidationsErrors($exception->errors())
             ], 400);
         }
 
