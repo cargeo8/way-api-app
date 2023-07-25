@@ -101,7 +101,7 @@ class AuthenticationController extends Controller
             "person_id" => $data["personId"],
             // "codciud" => $data["city"],
             // "address" => $data["address"],
-            "phoneNumber" => $data["phone_number"],
+            // "phoneNumber" => $data["phone_number"],
         ];
         $createdUser = User::create(
             $dataForUser
