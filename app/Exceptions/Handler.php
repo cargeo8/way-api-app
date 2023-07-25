@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
             $out = "";
             $keys = array_keys($arr);
             foreach ($keys as $key) {
-                $out .= implode("\n", $arr[$key]) . "\n";
+                $out .= implode("\n", $arr[$key] ?? []) . "\n";
             }
             return $out;
         };
