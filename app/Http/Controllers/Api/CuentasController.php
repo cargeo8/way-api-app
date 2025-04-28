@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Http;
 
 class CuentasController extends Controller
 {
-    public function __construct(private CuentasService $_cuentas)
-    {
-    }
+    public function __construct(private CuentasService $_cuentas) {}
     public function GetMisCuentas(string $user_id)
     {
         $user = Auth::user();

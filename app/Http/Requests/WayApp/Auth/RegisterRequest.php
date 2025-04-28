@@ -24,14 +24,11 @@ class RegisterRequest extends FormRequest
         return [
             "names" => "required",
             "surnames" => "required",
-            "IdType" => "required|in:dui,nit,passport",
+            "invoice" => "required|numeric",
+            "invoiceDate" => "required|date",
+            "IdType" => "required|in:DUI,NIT,Pasaporte",
             "personId" => "required",
-            "birthDate" => "required|date",
-            "departament" => "required|exists:departamentos,coddpto",
-            "city" => "required|exists:municipios,codciud",
-            "address" => "required",
-            "phoneNumber" => "required",
-            "email" => "required|email|unique:users,email",
+            "email" => "required|email",
             "password" => "required"
         ];
     }

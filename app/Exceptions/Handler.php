@@ -76,7 +76,7 @@ class Handler extends ExceptionHandler
         }
 
         return response([
-            'error' => $exception->getMessage()
+            'error' => $exception->getMessage(),
         ], $exception->getCode() ?: 400);
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\SucursalesController;
 use App\Http\Controllers\DepartamentosMunicipiosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,7 @@ Route::middleware("api")->group(function () {
         Route::post("logout", [AuthenticationController::class, 'logout']);
         Route::post("register", [AuthenticationController::class, 'register']);
         Route::post("editUser", [AuthenticationController::class, 'editUser']);
+        Route::post("verifyCode", [AuthenticationController::class, 'verifyCode']);
     });
 });
 Route::get("promociones/{user_id?}", [PromocionesController::class, 'GetPromocionesByUser']);
@@ -48,3 +50,17 @@ Route::get("marcasImage/{path}", [BannerMarcasController::class, 'GetImage']);
 
 Route::get("/getDepartamentos", [DepartamentosMunicipiosController::class, "GetDepartamentos"]);
 Route::get("/getMunicipios/{coddpto}", [DepartamentosMunicipiosController::class, "GetMunicipioByCodDpto"]);
+
+Route::group(['namespace' => 'Api\Auth'], function () {
+    Route::middleware('auth:api')->get('/token/revoke', function (Request $request) {
+        DB::table('oauth_access_tokens')
+            ->where('user_id', $request->user()->id)
+            ->update([
+                'revoked' => true
+            ]);
+        $user = Auth::user();
+        DB::table('oauth_access_tokens')->where('user_id', $user->id)->delete();
+
+        return response()->json('DONE');
+    });
+});

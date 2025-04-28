@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/preview-register-code', function () {
+    return view('emails.registerCode', ['registrationCode' =>   strtoupper(substr(bin2hex(random_bytes(3)), 0, 6))]);
+});

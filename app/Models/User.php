@@ -26,9 +26,6 @@ class User extends Authenticatable
         "surnames",
         "id_type",
         "person_id",
-        "codciud",
-        "address",
-        "phone_number"
     ];
 
     /**
