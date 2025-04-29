@@ -8,12 +8,15 @@ use App\Http\Services\ClienteService;
 
 class ClienteController extends Controller
 {
-    public function __construct(private ClienteService $_cliente)
-    {
-    }
+    public function __construct(private ClienteService $_cliente) {}
     #/api/getAllTest?codigo_cliente=1221212
     public function GetMyClient(GetMyClientRequest $request)
     {
         return $this->_cliente->GetMyClient($request->codigo_cliente);
+    }
+
+    public function GetProfile()
+    {
+        return $this->_cliente->GetProfile();
     }
 }

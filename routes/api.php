@@ -26,6 +26,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::get("/profile", [ClienteController::class, "GetProfile"]);
 });
 
 Route::middleware("auth:api")
@@ -39,6 +41,10 @@ Route::middleware("api")->group(function () {
         Route::post("register", [AuthenticationController::class, 'register']);
         Route::post("editUser", [AuthenticationController::class, 'editUser']);
         Route::post("verifyCode", [AuthenticationController::class, 'verifyCode']);
+        Route::post("changePassword", [AuthenticationController::class, 'changePassword'])->middleware(['auth:api']);
+        Route::post("recoverAccount", [AuthenticationController::class, 'recoverAccount']);
+        Route::post("validateRecoveryCode", [AuthenticationController::class, 'validateRecoveryCode']);
+        Route::post("changePassworForRecovery", [AuthenticationController::class, 'ChangePassworForRecoveryCode']);
     });
 });
 Route::get("promociones/{user_id?}", [PromocionesController::class, 'GetPromocionesByUser']);

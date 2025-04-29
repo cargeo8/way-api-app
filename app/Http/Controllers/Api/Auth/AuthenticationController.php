@@ -275,4 +275,113 @@ class AuthenticationController extends Controller
         $user->save();
         return response()->json(['message' => 'Usuario verificado correctamente']);
     }
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            "currentPassword" => "required|string",
+            "newPassword" => "required|string",
+        ]);
+        $user = User::find(Auth::user()->id);
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return response()->json(['message' => 'La contraseña actual proporcionada es incorrecta'], 400);
+        }
+        if ($request->currentPassword === $request->newPassword) {
+            return response()->json(['message' => 'La nueva contraseña no puede ser igual a la actual'], 400);
+        }
+        $user->password = Hash::make($request->newPassword);
+        $user->save();
+        // Revocar todos los tokens del usuario
+        $user->tokens()->each(function ($token) {
+            $token->revoke();
+        });
+
+        return response()->json(['message' => 'Contraseña actualizada correctamente']);
+    }
+
+    public function recoverAccount(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        // Verificar si el usuario existe, NO notificar si no existe para evitar revelar información
+        if ($user) {
+            // Generar nuevo código de verificación
+            $code = strtoupper(substr(bin2hex(random_bytes(3)), 0, 6));
+            $user->recovery_code = $code;
+            $user->save();
+
+            $data = [
+                "registrationCode" => $code
+            ];
+            $correo_origen = "sistemas@portalagenciasway.com";
+            $correo_vista = "emails.recoveryCode";
+            $correo_subject = "Código de verificación - Agencias Way El Salvador";
+            $direccionCorreo = $user->email;
+            $correo_origen_name = "Equipo de Agencias Way El Salvador";
+            $con_copia = [];
+
+            try {
+                Mail::send($correo_vista, $data, function ($message) use ($correo_subject, $con_copia, $direccionCorreo, $correo_origen, $correo_origen_name) {
+                    $message->to($direccionCorreo, $direccionCorreo)
+                        ->cc($con_copia)
+                        ->from($correo_origen, $correo_origen_name)
+                        ->subject($correo_subject);
+                });
+            } catch (\Throwable $th) {
+                // return response()->json(['message' => 'No se pudo enviar el correo de verificación'], 500);
+            }
+        }
+        return response()->json(['message' => 'Se ha enviado un código de recuperación']);
+    }
+
+    public function validateRecoveryCode(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'recovery_code' => 'required|string'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        // Verificar si el usuario existe, el mensaje de error es el mismo para evitar revelar información
+        if (!$user) {
+            return response()->json(['message' => 'Código de recuperación incorrecto'], 404);
+        }
+
+        if ($user->recovery_code !== $request->recovery_code) {
+            return response()->json(['message' => 'Código de recuperación incorrecto'], 404);
+        }
+
+
+        return response()->json(['message' => 'Código de recuperación válido']);
+    }
+
+    public function ChangePassworForRecoveryCode(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'recovery_code' => 'required|string',
+            'newPassword' => 'required|string',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        // Verificar si el usuario existe, el mensaje de error es el mismo para evitar revelar información
+        if (!$user) {
+            return response()->json(['message' => 'Código de recuperación incorrecto'], 404);
+        }
+
+        if ($user->recovery_code !== $request->recovery_code) {
+            return response()->json(['message' => 'Código de recuperación incorrecto'], 404);
+        }
+
+        $user->password = Hash::make($request->newPassword);
+        $user->recovery_code = null;
+        $user->save();
+
+        return response()->json(['message' => 'Contraseña actualizada correctamente']);
+    }
 }

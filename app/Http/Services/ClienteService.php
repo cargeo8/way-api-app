@@ -6,6 +6,8 @@ class ClienteService extends BaseService
 {
     public const GET_MY_CLIENT = "/api/Cliente";
     public const SEARCH_CLIENT_BY_PERSON_ID = "/api/way-app/cliente/searchByPersonId";
+    public const GET_MY_PROFILE  = "/api/way-app/cuentas";
+
 
     public function GetMyClient(string $codigo_cliente)
     {
@@ -16,5 +18,11 @@ class ClienteService extends BaseService
     {
         return $this->Make()->get(self::SEARCH_CLIENT_BY_PERSON_ID .
             "?id_type=$id_type&person_id=$person_id");
+    }
+    public function GetProfile()
+    {
+
+        $user = auth()->user();
+        return $this->Make()->get(self::GET_MY_PROFILE . "/getProfile/{$user->codigo_cliente}?id_type={$user->id_type}&person_id={$user->person_id}");
     }
 }
